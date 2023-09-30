@@ -4,10 +4,9 @@ import ReactDOM from "react-dom";
 
 // include your styles into the webpack bundle
 import "../styles/index.css";
-import ToDo from "./component/ToDo.jsx";
 
 //import your own components
-import Home from "./component/ToDo.jsx";
+import ToDo from "./component/ToDo.jsx";
 
 //render your react application
 ReactDOM.render(<ToDo />, document.querySelector("#app"));
