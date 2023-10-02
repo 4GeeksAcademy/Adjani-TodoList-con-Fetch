@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 const urlBase = "https://playground.4geeks.com/apis/fake/todos/user/Adjani"
 
 function ToDo() {
-    const [task, setTask] = useState(["Tomar Agua", "Sacar Perros", "Estudiar"]);
+    const [task, setTask] = useState([]);
     const [text, setText] = useState({label:"", done:false});
 
     const handleChange = (e) => {
@@ -58,7 +58,7 @@ function ToDo() {
             const respuesta = await fetch(urlBase)
             const data = await respuesta.json()
             if (respuesta.status == 404) {
-                console.log("debo crear usuario");
+                createUser()
             }
             if (respuesta.ok) {
                 setTask(data)
@@ -67,10 +67,26 @@ function ToDo() {
             console.log(error);
         }
     }
+    const createUser = async () =>{
+        try {
+            const response = await fetch(urlBase, {
+                method: "POST",
+                headers:{
+                    "Content-Type":"application/json",
+                },
+                body: JSON.stringify([])
+            })
+            if (response.ok) {
+                getTask()                
+            }           
+        } catch (error) {
+            console.log(error);          
+        }
+    }
 
     useEffect(() => {
         getTask()
-    }, [task])
+    }, [])
 
     return (
         <div className= "container" style={{ width: 750, backgroundColor: "#fbc7e121", padding: 50, fontSize: 20, fontFamily:"sans-serif"}}>
